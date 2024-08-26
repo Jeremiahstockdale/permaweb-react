@@ -8,12 +8,12 @@ function Configure()
   dbAdmin = require('@rakis/DbAdmin').new(Db)
   
   dbAdmin:exec([[
-CREATE TABLE IF NOT EXISTS Todos (
-  Id INTEGER PRIMARY KEY AUTOINCREMENT,
-  Owner TEXT NOT NULL,
-  Description TEXT NOT NULL,
-  Complete INTEGER NOT NULL
-);
+    CREATE TABLE IF NOT EXISTS Todos (
+      Id INTEGER PRIMARY KEY AUTOINCREMENT,
+      Owner TEXT NOT NULL,
+      Description TEXT NOT NULL,
+      Complete INTEGER NOT NULL
+    );
   ]])
 
   Configured = true
@@ -36,6 +36,11 @@ end)
 
 Handlers.add("Complete", function (msg)
   dbAdmin:apply('update Todos set Complete = 1 where Id = ? and Owner = ?', { msg.Data, msg.From }) 
+  print("OK")
+end)
+
+Handlers.add("UnComplete", function (msg)
+  dbAdmin:apply('update Todos set Complete = 0 where Id = ? and Owner = ?', { msg.Data, msg.From }) 
   print("OK")
 end)
 

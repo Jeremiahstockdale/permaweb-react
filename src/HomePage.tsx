@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom";
-import './homePage.css'; // Assuming you're using an external CSS file
-import { add, list } from './dal'
+import './homePage.css';
+import { add, list, complete, unComplete, deleteTodo } from './dal'
+import { useEffect, useState } from "react";
+import DeleteConfirmationModal from './tools/DeleteConfirmationModal';
 
-async function createTodo() {
-	const result = await add("Test Todo")
+type Result = {
+	Complete: number
+	Description: string,
+	Id: string
+}
+
+async function createTodo(description: string) {
+	const result = await add(description)
 	console.log(result)
 }
 
@@ -11,20 +18,109 @@ async function listTodos() {
 	// @ts-ignore
 	const address = await globalThis.arweaveWallet.getActiveAddress()
 	const result = await list(address)
-	console.log(result)
 
+	return result
 }
 
+async function completeTodo(id: string) {
+	// @ts-ignore
+	const address = await globalThis.arweaveWallet.getActiveAddress()
+
+	const result = await complete(id, address)
+
+	return result
+}
+
+async function unCompleteTodo(id: string) {
+	// @ts-ignore
+	const address = await globalThis.arweaveWallet.getActiveAddress()
+
+	const result = await unComplete(id, address)
+
+	return result
+}
+
+async function deleteTodo_(id: string) {
+	// @ts-ignore
+	const address = await globalThis.arweaveWallet.getActiveAddress()
+
+	const result = await deleteTodo(id, address)
+
+	return result
+}
+
+
+
 function HomePage() {
+	const [results, setResults] = useState<Result[]>([])
+	const [description, setDescription] = useState<string>('')
+	const [todoToDelete, setTodoToDelete] = useState<string | null>(null)
+
+	const handleList = async () => {
+		await listTodos().then(JSON.parse).then(r => setResults(r))
+	}
+
+	const handleCreate = async () => {
+		await createTodo(description)
+			.then(() => setDescription(''))
+			.then(handleList)
+	}
+
+	const handleComplete = async (r: Result) => {
+		const run = async () => {
+			if (!r.Complete) {
+				await completeTodo(r.Id)
+			} else {
+				await unCompleteTodo(r.Id)
+			}
+		}
+
+		await run().then(handleList)
+	}
+
+	const handleDelete = async (id: string | null) => {
+		if (!id) return
+
+		await deleteTodo_(id).then(handleList)
+	}
+
+	useEffect(() => {
+		handleList()
+	},[])
+
 	return (
-		<div className="homepage-container">
-			<h1 className="homepage-title">Welcome to the Permaweb!</h1>
-			<Link to="/about/" className="homepage-link">
-				<div className="homepage-link-content">About</div>
-			</Link>
-			<button onClick={createTodo}>Create Todo</button>
-			<button onClick={listTodos}>List</button>
-		</div>
+		<>
+			<div className="homepage-container">
+				<h1 className="homepage-title">Todo List</h1>
+
+				<input
+					type="text"
+					onChange={(e) => setDescription(e.target.value)}
+					value={description}
+					placeholder="Enter a new todo..."
+				/>
+
+				<div>
+					<button onClick={handleCreate} className="homepage-link-content">Create Todo</button>
+				</div>
+
+				<div className="results-container">
+					{!results.length ? <>No Todos. Try creating one</> : results.map(r => (
+						<div key={r.Id} className="result-item">
+							<div className='clickable' onClick={() => setTodoToDelete(r.Id)}>x</div>
+							<div className='cursor-none'>{r.Description}</div>
+							<div className='clickable' onClick={() => handleComplete(r)}>{r.Complete ? '✅' : '⬜️'}</div>
+						</div>
+					))}
+				</div>
+			</div>
+
+			<DeleteConfirmationModal 
+				isOpen={!!todoToDelete}
+				onClose={() => setTodoToDelete(null)}
+				onDelete={() => handleDelete(todoToDelete)}
+			/>
+		</>
 	);
 }
 
