@@ -1,5 +1,6 @@
-import React from 'react';
+import { h, FunctionalComponent } from 'preact';
 import './DeleteConfirmationModal.css';
+import { JSX } from 'preact';
 
 type DeleteConfirmationModalProps = {
 	isOpen: boolean;
@@ -7,8 +8,8 @@ type DeleteConfirmationModalProps = {
 	onDelete: () => void;
 };
 
-const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({ isOpen, onClose, onDelete }) => {
-	if (!isOpen) return null;
+const DeleteConfirmationModal = ({isOpen, onClose, onDelete}: DeleteConfirmationModalProps): JSX.Element => {
+	if (!isOpen) return <></>;
 
 	return (
 		<div className="modal-overlay">

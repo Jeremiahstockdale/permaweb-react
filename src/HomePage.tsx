@@ -1,7 +1,9 @@
 import './homePage.css';
 import { add, list, complete, unComplete, deleteTodo } from './dal'
-import { useEffect, useState } from "react";
+import { useState, useEffect } from 'preact/hooks';
+import { FunctionalComponent } from 'preact';
 import DeleteConfirmationModal from './tools/DeleteConfirmationModal';
+import { JSX } from 'preact';
 
 type Result = {
 	Complete: number
@@ -48,7 +50,7 @@ async function deleteTodo_(id: string) {
 
 
 
-function HomePage() {
+const HomePage: FunctionalComponent = () => {
 	const [results, setResults] = useState<Result[]>([])
 	const [description, setDescription] = useState<string>('')
 	const [todoToDelete, setTodoToDelete] = useState<string | null>(null)
@@ -142,6 +144,7 @@ function HomePage() {
 
 			</div>
 
+			{/* @ts-ignore */}
 			<DeleteConfirmationModal
 				isOpen={!!todoToDelete}
 				onClose={() => setTodoToDelete(null)}

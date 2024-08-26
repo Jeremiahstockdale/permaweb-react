@@ -4,6 +4,7 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
+    "@preact/compat": "^17.1.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -15,6 +16,7 @@
     "homepage": ".",
     "permaweb-deploy": "^1.1.7",
     "react": "^18.3.1",
+    "react-app-rewired": "^2.2.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
@@ -24,9 +26,9 @@
   },
   "scripts": {
     "deploy": "DEPLOY_KEY=$(base64 -i test.json) permaweb-deploy --deploy-folder=build --ant-process NOWHERE",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -48,6 +50,7 @@
     ]
   },
   "devDependencies": {
-    "@permaweb/aoconnect": "^0.0.59"
+    "@permaweb/aoconnect": "^0.0.59",
+    "customize-cra": "^1.0.0"
   }
 }
