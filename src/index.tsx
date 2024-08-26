@@ -4,6 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// @ts-ignore
+if (globalThis.arweaveWallet) {
+  // @ts-ignore
+  globalThis.arweaveWallet.connect(['ACCESS_ADDRESS', 'SIGN_TRANSACTION'])
+} else {
+  alert('No Wallet Found!')
+}
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
