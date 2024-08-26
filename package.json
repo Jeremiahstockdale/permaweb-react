@@ -2,6 +2,7 @@
   "name": "permaweb-create-react-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -10,13 +11,18 @@
     "@types/node": "^16.18.105",
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
+    "arweave": "^1.14.4",
+    "permaweb-deploy": "^1.1.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
+    "sqlite": "^5.1.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "deploy": "DEPLOY_KEY=$(base64 -i wallet.json) permaweb-deploy --deploy-folder=build --ant-process NOWHERE",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

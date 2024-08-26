@@ -1,0 +1,46 @@
+.about-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	background: linear-gradient(135deg, #ffa07a, #20b2aa);
+	color: #fff;
+	text-align: center;
+}
+
+.about-title {
+	font-size: 3rem;
+	margin-bottom: 20px;
+	animation: slideIn 2s ease-in-out;
+}
+
+.about-link {
+	text-decoration: none;
+}
+
+.about-link-content {
+	background: rgba(255, 255, 255, 0.2);
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 1.5rem;
+	color: #fff;
+	transition: background 0.3s, transform 0.3s;
+	cursor: pointer;
+}
+
+.about-link-content:hover {
+	background: rgba(255, 255, 255, 0.4);
+	transform: scale(1.1);
+}
+
+@keyframes slideIn {
+	from {
+		opacity: 0;
+		transform: translateX(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}

@@ -1,0 +1,46 @@
+.homepage-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	background: linear-gradient(135deg, #f06, #aaf);
+	color: #fff;
+	text-align: center;
+}
+
+.homepage-title {
+	font-size: 3rem;
+	margin-bottom: 20px;
+	animation: fadeIn 2s ease-in-out;
+}
+
+.homepage-link {
+	text-decoration: none;
+}
+
+.homepage-link-content {
+	background: rgba(255, 255, 255, 0.2);
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 1.5rem;
+	color: #fff;
+	transition: background 0.3s, transform 0.3s;
+	cursor: pointer;
+}
+
+.homepage-link-content:hover {
+	background: rgba(255, 255, 255, 0.4);
+	transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
