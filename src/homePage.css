@@ -55,30 +55,12 @@ input[type='text']:focus {
 	background: rgba(255, 255, 255, 0.3);
 }
 
-.result-item {
-	display: flex;
-
-	align-items: center;
-	justify-content: space-between;
-	background: rgba(255, 255, 255, 0.1);
-	padding: 10px;
-	border-radius: 5px;
-	margin: 20px 0;
-	width: 80%;
-	max-width: 500px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .clickable {
 	cursor: pointer;
 }
 
 .cursor-none {
 	cursor: none;
-}
-
-.result-item div {
-	cursor: pointer;
 }
 
 .result-item div:first-child {
@@ -100,6 +82,7 @@ input[type='text']:focus {
 	border: red, 1px, solid;
 }
 
+/* Fade In Animation */
 @keyframes fadeIn {
 	from {
 		opacity: 0;
@@ -109,4 +92,57 @@ input[type='text']:focus {
 		opacity: 1;
 		transform: translateY(0);
 	}
+}
+
+/* Fade Out Animation */
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	to {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+}
+
+/* Completion Animation */
+@keyframes complete {
+	0% {
+		transform: scale(1);
+		background-color: rgba(255, 255, 255, 0.1);
+	}
+	50% {
+		transform: scale(1.05);
+		background-color: rgba(0, 255, 0, 0.2);
+	}
+	100% {
+		transform: scale(1);
+		background-color: rgba(255, 255, 255, 0.1);
+	}
+}
+
+.result-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: rgba(255, 255, 255, 0.1);
+	padding: 10px;
+	border-radius: 5px;
+	margin: 20px 0;
+	width: 80%;
+	max-width: 500px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	animation: fadeIn 0.5s ease forwards;
+	opacity: 1;
+	transition: opacity 0.5s ease;
+}
+
+.result-item.fade-out {
+	animation: fadeOut 0.5s ease forwards;
+	opacity: 0;
+}
+
+.result-item.complete {
+	animation: complete 0.5s ease;
 }

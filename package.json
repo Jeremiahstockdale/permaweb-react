@@ -12,6 +12,7 @@
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
     "arweave": "^1.14.4",
+    "homepage": ".",
     "permaweb-deploy": "^1.1.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -22,7 +23,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "deploy": "DEPLOY_KEY=$(base64 -i wallet.json) permaweb-deploy --deploy-folder=build --ant-process NOWHERE",
+    "deploy": "DEPLOY_KEY=$(base64 -i test.json) permaweb-deploy --deploy-folder=build --ant-process NOWHERE",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
