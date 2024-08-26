@@ -31,21 +31,21 @@ end)
 Handlers.add("Add-Item", function (msg)
   dbAdmin:apply('insert into Todos (Owner, Description, Complete) values (?, ?, ?)', 
     { msg.From, msg.Data, 0 })  
-  print("OK")
+  print("Add-Item OK")
 end)
 
 Handlers.add("Complete", function (msg)
   dbAdmin:apply('update Todos set Complete = 1 where Id = ? and Owner = ?', { msg.Data, msg.From }) 
-  print("OK")
+  print("Complete OK")
 end)
 
 Handlers.add("UnComplete", function (msg)
   dbAdmin:apply('update Todos set Complete = 0 where Id = ? and Owner = ?', { msg.Data, msg.From }) 
-  print("OK")
+  print("UnComplete OK")
 end)
 
 Handlers.add("Remove", function (msg) 
   dbAdmin:apply('delete from Todos where Id = ? and Owner = ?', { msg.Data, msg.From })
-  print("OK")
+  print("Remove OK")
 end)
 

@@ -61,6 +61,8 @@ function HomePage() {
 	}
 
 	const handleCreate = async () => {
+		if (!description) return
+
 		await createTodo(description)
 			.then(() => setDescription(''))
 			.then(handleList)
@@ -86,7 +88,7 @@ function HomePage() {
 
 	useEffect(() => {
 		handleList()
-	},[])
+	}, [])
 
 	return (
 		<>
@@ -104,18 +106,18 @@ function HomePage() {
 					<button onClick={handleCreate} className="homepage-link-content">Create Todo</button>
 				</div>
 
-				<div className="results-container">
-					{!results.length ? <>No Todos. Try creating one</> : results.map(r => (
-						<div key={r.Id} className="result-item">
-							<div className='clickable' onClick={() => setTodoToDelete(r.Id)}>x</div>
-							<div className='cursor-none'>{r.Description}</div>
-							<div className='clickable' onClick={() => handleComplete(r)}>{r.Complete ? '✅' : '⬜️'}</div>
-						</div>
-					))}
-				</div>
+
+				{!results.length ? <>No Todos. Try creating one</> : results.map(r => (
+					<div key={r.Id} className="result-item">
+						<div className='clickable' onClick={() => setTodoToDelete(r.Id)}>x</div>
+						<div className='cursor-none'>{r.Description}</div>
+						<div className='clickable' onClick={() => handleComplete(r)}>{r.Complete ? '✅' : '⬜️'}</div>
+					</div>
+				))}
+
 			</div>
 
-			<DeleteConfirmationModal 
+			<DeleteConfirmationModal
 				isOpen={!!todoToDelete}
 				onClose={() => setTodoToDelete(null)}
 				onDelete={() => handleDelete(todoToDelete)}

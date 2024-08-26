@@ -1,6 +1,6 @@
 import { message, result, createDataItemSigner, dryrun } from '@permaweb/aoconnect'
 
-const PROCESS = "" // add your ao.id
+const PROCESS = "MyS1C32c4shlzUOrzLEJpHaIqF0SvGOgLtzkAuRoGzE"
 
 function read(tags: [{ name: string, value: string }], options = {}) {
   return dryrun({
@@ -16,7 +16,7 @@ function read(tags: [{ name: string, value: string }], options = {}) {
   }).then(res => res.Output.data)
 }
 
-function write(data: string, tags: [{ name: string, value: string }]) {
+function write(data: string, tags: [{ name: string, value: string }], options = {}) {
 
   return message({
     process: PROCESS,
@@ -29,34 +29,19 @@ function write(data: string, tags: [{ name: string, value: string }]) {
       { name: 'Type', value: 'Message' },
       ...tags
     ],
+    ...options
   }).then(id => result({
     process: PROCESS,
     message: id
   })).then(res => res.Output.data)
 }
 
-function update(id: string,  tags: [{ name: string, value: string }], options = {}) {
-  return message({
-    process: PROCESS,
-    // @ts-ignore
-    signer: createDataItemSigner(globalThis.arweaveWallet),
-    data: id,
-    tags: [
-      { name: 'Data-Protocol', value: 'ao' },
-      { name: 'Variant', value: 'ao.TN.1' },
-      { name: 'Type', value: 'Message' },
-      ...tags
-    ],
-    ...options
-  })
-}
-
 export function complete(id: string, user: string) {
-  return update(id.toString(), [{ name: 'Action', value: 'Complete' }], { Owner: user })
+  return write(id.toString(), [{ name: 'Action', value: 'Complete' }], { Owner: user })
 }
 
 export function unComplete(id: string, user: string) {
-  return update(id.toString(), [{ name: 'Action', value: 'UnComplete' }], { Owner: user })
+  return write(id.toString(), [{ name: 'Action', value: 'UnComplete' }], { Owner: user })
 }
 
 
@@ -69,5 +54,5 @@ export function add(description: string) {
 }
 
 export function deleteTodo(id: string, user: string) {
-  return update(id.toString(), [{ name: 'Action', value: 'Remove' }], { Owner: user })
+  return write(id.toString(), [{ name: 'Action', value: 'Remove' }], { Owner: user })
 }
