@@ -116,23 +116,20 @@ const HomePage: FunctionalComponent = () => {
 			<div className="homepage-container">
 				<h1 className="homepage-title">Todo List</h1>
 
-				<input
-					type="text"
+				<textarea
 					onChange={(e) => setDescription(e.target.value)}
 					value={description}
 					placeholder="Enter a new todo..."
 					disabled={isProcessing}
 				/>
 
-				<div>
-					<button 
-						onClick={handleCreate} 
-						className="homepage-link-content"
-						disabled={isProcessing}
-					>
-						{isProcessing ? 'Processing...' : 'Create Todo'}
-					</button>
-				</div>
+				<button 
+					onClick={handleCreate} 
+					className={`homepage-link-content ${isProcessing || !description ? 'disabled-button' : ''}`}
+					disabled={isProcessing || !description}
+				>
+					{isProcessing ? 'Processing...' : 'Create Todo'}
+				</button>
 
 				{!results.length ? <>No Todos. Try creating one</> : results.map(r => (
 					<div key={r.Id} id={r.Id} className={`result-item ${r.Complete ? 'complete' : ''}`}>
