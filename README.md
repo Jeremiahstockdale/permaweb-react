@@ -427,6 +427,18 @@ Deploy your app to the Permaweb:
 npm run deploy
 ```
 
+Now if you want to use React to launch your app. You will need to following:
+Comment
+Suggest edit
+Edit from here
+
+Arweave Wallet
+Adrive Turbo Credits
+Setup a wallet on arconnect
+
+https://arconnect.io
+
+Get Turbo Credits don't need much, $5 dollars
 
 Copy the Manifest ID from the output and paste it into your browser using the following format:
 ```plaintext
