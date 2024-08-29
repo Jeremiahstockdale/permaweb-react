@@ -407,12 +407,26 @@ Build your app:
 ```bash
 npm run build
 ```
+
+Set up the script to deploy your app in 'package.json'
+
+```
+{
+    ...
+    "scripts": {
+        "deploy": DEPLOY_KEY=$(base64 -i test.json) npx -y permaweb-deploy --deploy-folder dist --ant-process none
+        ...
+    }
+}
+```
+make sure the path to your wallet is correct.
+
 Deploy your app to the Permaweb:
 
 ```bash
-DEPLOY_KEY=$(base64 -i test.json) npx -y permaweb-deploy --deploy-folder dist --ant-process none
+npm run deploy
 ```
-make sure the path to your wallet is correct.
+
 
 Copy the Manifest ID from the output and paste it into your browser using the following format:
 ```plaintext
