@@ -383,13 +383,83 @@ const handleDelete = async (id) => {
 }
 ```
 
+ You should now be able to:
+- Connect your wallet
+- List todos
+- Create new todos
+- Mark them as completed
+- Delete them
+
 ## Step 6: Style Your App
-Style the page as desired. You should now be able to:
-Connect your wallet
-List todos
-Create new todos
-Mark them as completed
-Delete them
+
+here's some CSS to get you started. add this to index.css
+
+```css
+
+  .todo-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+  }
+  
+  .todo-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #555;
+	padding: 15px;
+	border-radius: 8px;
+	font-size: 18px;
+  }
+  
+  .todo-item.completed span {
+	text-decoration: line-through;
+	color: #aaa;
+  }
+  
+  .todo-item input[type='checkbox'] {
+	margin-right: 15px;
+	transform: scale(1.5);
+  }
+  
+  .todo-item button {
+	background-color: #ff4d4d;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	max-width: 20px;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+  }  
+  
+  .todo-app button {
+	display: block;
+	width: 100%;
+	padding: 15px;
+	font-size: 18px;
+	color: #fff;
+	background-color: #28a745;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	margin-bottom: 25px;
+  }
+  
+  .todo-app button:hover {
+	background-color: #218838;
+  }
+  
+  .todo-app button:disabled {
+	background-color: #666;
+	cursor: not-allowed;
+  }
+  
+```
 
 ## Step 7: Deploying to the Permaweb
 Install necessary packages:
